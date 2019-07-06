@@ -195,6 +195,17 @@
     </section>
     <!-- end of cards -->
 
+    <script>
+         function plot_init() {
+            myChart("Nacional","Total")
+            myChart2("Nacional","Total")
+            myChart3("Nacional","Total")
+            initializingMap();
+            createMap_init();
+         }
+         window.onload = plot_init;
+    </script>
+
     <!-- footer -->
     <footer>
       <div class="container-fluid">
@@ -221,9 +232,3 @@
     <script type="text/javascript" src="static/js/charts.js"></script>
   </body>
 </html>
-
-
-
-
-
-
