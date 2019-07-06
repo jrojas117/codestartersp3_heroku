@@ -8,7 +8,7 @@ app = Flask(__name__)
 #************************
 # ***********************DATABASE LOCAL
 #************************
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://joselogin@empresasmexico:empresasmexico123!@empresasmexico.mysql.database.azure.com/vida_empresas"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://joselogin@empresasmexico:empresasmexico123!@empresasmexico.mysql.database.azure.com/vida_empresas"
 
 #************************
 # ***********************DATABASE HEROKU
