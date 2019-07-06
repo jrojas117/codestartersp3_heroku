@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--<link rel="stylesheet" href="style.css">  -->
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    <!-- d3 JS -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Marker Cluster JS & CSS -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+    <!-- Leaflet-Choropleth JavaScript -->
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+      <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- sidebar -->
+            <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+              <!--<a href="#" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">CodeAndCreate</a>-->
+              <div class="bottom-border pb-3">
+                <img src="static/images/onlIvplh_400x400.jpg" width="50" class="rounded-circle mr-3">
+                <a href="#" class="text-white">Nepomuceno</a>
+              </div>
+              <ul class="navbar-nav flex-column mt-4">
+                <select id="selDataset" onchange="getData(this.value)">
+                  <option value="dataset1">Select_Sector</option>
+                  <option value="dataset2">Comercio</option>
+                  <option value="dataset3">Manufactura</option>
+                  <option value="dataset4">Servicios</option>
+                  <option value="dataset5">Otros</option>
+                </select>
+                </br>
+                <select id="selDataset" onchange="getData_estados(this.value)">
+                  <option value="dataset_est_1">Select_State</option>
+                  <option value="dataset_est_2">AGUASCALIENTES</option>
+                  <option value="dataset_est_3">BAJA CALIFORNIA</option>
+                  <option value="dataset_est_4">BAJA CALIFORNIA SUR</option>
+                  <option value="dataset_est_5">CAMPECHE</option>
+                  <option value="dataset_est_6">CHIAPAS</option>
+                  <option value="dataset_est_7">CHIHUAHUA</option>
+                  <option value="dataset_est_8">CIUDAD DE MEXICO</option>
+                  <option value="dataset_est_9">COAHUILA</option>
+                  <option value="dataset_est_10">COLIMA</option>
+                  <option value="dataset_est_11">DURANGO</option>
+                  <option value="dataset_est_12">ESTADO DE MEXICO</option>
+                  <option value="dataset_est_13">GUANAJUATO</option>
+                  <option value="dataset_est_14">GUERRERO</option>
+                  <option value="dataset_est_15">HIDALGO</option>
+                  <option value="dataset_est_16">JALISCO</option>
+                  <option value="dataset_est_17">MICHOACAN</option>
+                  <option value="dataset_est_18">MORELOS</option>
+                  <option value="dataset_est_19">NAYARIT</option>
+                  <option value="dataset_est_20">NUEVO LEON   </option>
+                  <option value="dataset_est_21">OAXACA</option>
+                  <option value="dataset_est_22">PUEBLA</option>
+                  <option value="dataset_est_23">QUERETARO</option>
+                  <option value="dataset_est_24">QUINTANA ROO</option>
+                  <option value="dataset_est_25">SAN LUIS POTOSI</option>
+                  <option value="dataset_est_26">SINALOA</option>
+                  <option value="dataset_est_27">SONORA</option>
+                  <option value="dataset_est_28">TABASCO</option>
+                  <option value="dataset_est_29">TAMAULIPAS</option>
+                  <option value="dataset_est_30">TLAXCALA</option>
+                  <option value="dataset_est_31">VERACRUZ</option>
+                  <option value="dataset_est_32">YUCATAN</option>
+                  <option value="dataset_est_33">ZACATECAS</option>
+                </select>
+                </br>
+                <button id="actionButton" type="button" class="btn btn-primary btn-lg">Update</button>
+
+              </div>
+            </div>
+            <!-- end of sidebar -->
+
+            <!-- top-nav -->
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
+              <div class="row align-items-center">
+                <div class="col-md-12">
+                  <h4 class="text-light text-uppercase mb-0">Analisis nacional de empresas por sector comercial</h4>
+                </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of top-nav -->
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- end of navbar -->
+    <!-- cards -->
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row pt-md-5 mt-md-3 mb-5">
+              <div class="col-xl-6 col-sm-12 p-2">
+                <div class="card card-common">
+                  <div id="map" class="card-body" style = "height: 500px">
+                    <div class="d-flex justify-content-between">
+                      <div class="text-right text-secondary">
+                        <!--DIV PARA MAPA-->
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-globe-americas mr-3"></i>
+                    <span>Map Analytics</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-sm-12 p-2">
+                <div class="card card-common">
+                  <div class="card-body" style = "height: 500px">
+                  <div class="container"style = "height: 500px">
+                          <canvas id="myChart"></canvas>
+                  </div>
+                    <div class="d-flex justify-content-between">
+                      <div class="text-right text-secondary">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    <span>Sobrevivientes</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-sm-12 p-2">
+                <div class="card card-common">
+                  <div class="card-body" style = "height: 500px">
+                  <div class="container">
+                          <canvas id="myChart2"></canvas>
+                  </div>
+                    <div class="d-flex justify-content-between">
+                      <div class="text-right text-secondary">
+                     
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    <span>Probabilidad Supervivencia</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-sm-12 p-2">
+                <div class="card card-common">
+                  <div class="card-body" style = "height: 500px">
+                  <div class="container">
+                          <canvas id="myChart3"></canvas>
+                  </div>
+                    <div class="d-flex justify-content-between">
+                      <div class="text-right text-secondary">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-secondary">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    <span>Esperanza de Vida</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of cards -->
+
+    <!-- footer -->
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row border-top pt-3">
+              <div class="col-lg-12 text-right">
+                <p>&copy; Analytics powered by <span class="text-success">#Codestarters </span><i class="fas fa-poop"></i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end of footer -->
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="static/script.js"></script>
+    <script type="text/javascript" src="static/js/config.js"></script>
+    <script type="text/javascript" src="static/js/sector_selector.js"></script>
+    <script type="text/javascript" src="static/js/logic_test_9.js"></script>
+    <script type="text/javascript" src="static/js/charts.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
